@@ -1,5 +1,5 @@
-google.load('visualization', '1', {packages: ['corechart']});
-google.setOnLoadCallback(drawChart);
+google.charts.load('current', {packages: ['corechart', 'line']});
+google.charts.setOnLoadCallback(drawChart);
 
 //const
 var DAY_MILLISECONDS = 86400000;
@@ -11,6 +11,7 @@ today = new Date(today);
 var isChrome = window.chrome;
 
 function drawChart() {
+	
 	//console.log = function() {}
 
 	//some objs used over
@@ -70,6 +71,10 @@ function drawChart() {
 		weightMeasurements = getWeightMeasurements();	
 	}
 	
+	//show the chart if there are weeks selected
+	if(weightLossPerWeekAry.length > 0){
+		document.getElementById("chartContainer").classList.remove("prechart");
+	}
 	var data = new google.visualization.DataTable();
 	data.addColumn('date','Date');
 	//set up the columns that will contain the target weights
@@ -116,7 +121,7 @@ function drawChart() {
 			
 			var dateToPlotComp = new Date(dateToPlot);
 			
-			if(dateToPlotComp.getTime() == today.getTime()){				
+			if(dateToPlotComp.getTime() == today.getTime()){
 				pointStyle =  "point { size: 12; shape-type: star; }";
 				rwAnnotation = "Today";	
 				rwAnnotationText = "";
@@ -205,11 +210,12 @@ function drawChart() {
       }    
 	};
 	
-	
-	var chart = new google.visualization.LineChart(document.getElementById('apr2awChart'));
+	var chartDiv = document.getElementById('apr2awChart');
+	var chart = new google.visualization.LineChart(chartDiv);
 	//replace corechart with line in call above to see this work var chart = new google.charts.Line(document.getElementById('apr2awChart'));
 	chart.draw(data, options);
 	google.visualization.events.addListener(chart, 'select', selectHandler);
+	
 	
 	if(dayRangeEndDateObj.value == ""){
 		var startDate = new Date(dayRangeStartDateObj.value);
@@ -289,6 +295,7 @@ function storeLocally(){
 document.addEventListener("DOMContentLoaded", function(event) { 
   if(localStorage.startingDate != null){
 	document.getElementById("startingDate").value = localStorage.startingDate;
+	
   }
   if(localStorage.startingWeight != null){
 	document.getElementById("startingWeight").value = localStorage.startingWeight;
@@ -335,7 +342,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	//default value for weightMeasurement date
 	var today =  new Date();
 	setDateFieldValue("weighDate",today);
-		
  
 }, false);//end of DOMContentLoaded
 
