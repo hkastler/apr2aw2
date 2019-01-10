@@ -77,24 +77,25 @@
     <scm>
         <connection>scm:git:https://github.com/hkastler/apr2aw2.git</connection>
         <url>https://github.com/hkastler/apr2aw2</url>
-        <tag>${project.artifactId}-${revision}</tag>
     </scm>
     <distributionManagement>
         <snapshotRepository>
             <id>nexus</id>
-            <url>http://nexus:8081/repository/maven-snapshots/</url>
+            <url>http://nexus:8081/repository/maven-snapshots/</url> 
         </snapshotRepository>
-        <repository>
-            <id>nexus</id>
-            <url>http://nexus:8081/repository/maven-releases/</url>
-        </repository>
     </distributionManagement>
     <profiles>
         <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+            <id>release</id>
+            <properties>
+                <changelist></changelist>
+            </properties>
+            <distributionManagement>
+                <repository>
+                    <id>nexus</id>
+                    <url>http://nexus:8081/repository/maven-releases/</url>
+                </repository>
+            </distributionManagement>
         </profile>
     </profiles>
 </project>
