@@ -181,7 +181,7 @@
                 <p>Open Source. MIT License.</p>
             </footer>
         </div> <!-- /container -->        
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
        
         <!-- for the chart -->
         <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['corechart']}]}"></script>
@@ -189,6 +189,15 @@
         <script type="text/javascript" src="js/date.format.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+       <!--date field polyfill-->
+        <script src="//cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
+        <script src="//cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
+        <script>
+            webshims.setOptions('waitReady', false);
+            webshims.setOptions('forms-ext', {type: 'date'});
+            webshims.setOptions('forms-ext', {type: 'time'});
+            webshims.polyfill('forms forms-ext');
+        </script>
 
     </body>
 </html>
