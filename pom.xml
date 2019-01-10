@@ -10,9 +10,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <revision>1.0</revision>
+        <revision>1.1</revision>
         <changelist>-SNAPSHOT</changelist>
-        <sha1/>
+        <sha1 />
         <tag>${revision}${sha1}${changelist}</tag>
     </properties>
     <build>
@@ -55,7 +55,7 @@
                 <version>3.1.0</version>
                 <executions>
                     <execution>
-                        <id>copy-react-build-webapp</id>
+                        <id>copy-webapp</id>
                         <phase>generate-resources</phase>
                         <goals>
                             <goal>copy-resources</goal>
@@ -72,6 +72,17 @@
                     </execution>
                 </executions>
             </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <!-- don't need these resources copied into classes -->
+                    <!-- they're the webapp -->
+                    <packagingExcludes>**/apr2aw/**</packagingExcludes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <scm>
@@ -81,7 +92,7 @@
     <distributionManagement>
         <snapshotRepository>
             <id>nexus</id>
-            <url>http://nexus:8081/repository/maven-snapshots/</url> 
+            <url>http://nexus:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
     <profiles>
