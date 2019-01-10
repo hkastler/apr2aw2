@@ -23,7 +23,7 @@ public class App {
                     .setDirectoryListingEnabled(false);
             
             Undertow server = Undertow.builder()
-                    .addHttpListener(8080, "localhost")
+                    .addHttpListener(8080, "0.0.0.0")
                     .setHandler(path()
                         .addPrefixPath("/",resourceHandler)
                         .addPrefixPath("/apr2aw/", resourceHandler)
