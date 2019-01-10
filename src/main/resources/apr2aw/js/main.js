@@ -26,7 +26,9 @@ function drawChart() {
 
 	var weightLossPerWeekAry = getCheckedCheckboxesFor("weightLossPerWeek");
 	//console.log("weightLossPerWeekAry:" + weightLossPerWeekAry);
-	var weightLossPerWeek = parseInt(document.querySelector('input[name="weightLossPerWeek"]:checked').value);
+	var wlpwObj = document.querySelector('input[name="weightLossPerWeek"]:checked');
+	var parse = null == wlpwObj ? "0" : wlpwObj.value;
+	var weightLossPerWeek = parseInt(parse);
 
 	var numberOfWeeks = weightDiff / weightLossPerWeek
 	var numberOfDays = numberOfWeeks * 7
@@ -210,13 +212,15 @@ function drawChart() {
 	};
 
 	var chartDiv = document.getElementById('apr2awChart');
-	
+	var chart = new google.visualization.LineChart(chartDiv);
+
 	//show the chart if there are weeks selected
+	console.log(weightLossPerWeekAry.length);
 	if (weightLossPerWeekAry.length > 0) {
-		//document.getElementById("chartContainer").classList.remove("prechart");
-		var chart = new google.visualization.LineChart(chartDiv);
+		chartDiv.classList.remove("hidden");
 		chart.draw(data, options);
 	}
+		
 	google.visualization.events.addListener(chart, 'select', selectHandler);
 
 	if (dayRangeEndDateObj.value == "") {

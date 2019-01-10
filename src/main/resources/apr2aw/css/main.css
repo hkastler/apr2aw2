@@ -31,6 +31,10 @@
   height: 600px;
 }
 
+.hidden{
+  display: none;
+}
+
 .chartRange{ text-align: left; margin-bottom:var(--pad)}
 #resetRange{float:right;margin-right:110px;}
 

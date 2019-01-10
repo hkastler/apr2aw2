@@ -13,15 +13,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
-    <style>
-        body {
-                padding-top: 50px;
-                padding-bottom: 20px;
-            }
-        </style>
-
+    <link rel="icon" type="image/gif" href="favicon.ico" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
@@ -40,7 +33,7 @@
     </nav>
     <!-- google line chart here -->
     <div id="chartContainer" >
-        <div id="apr2awChart" class="chart"></div>
+        <div id="apr2awChart" class="chart hidden"></div>
     </div>
     <hr />
 
@@ -48,7 +41,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-title panel-heading">
+                    <div class="panel-heading">
                         <h3>Starting Information</h3>
                     </div>
                     <div class="panel-body">
@@ -75,13 +68,13 @@
                             <div class="form-group">
                                 <label for="weightLossPerWeek">Desired Weight Loss per Week</label>
                                 <!--input type="checkbox" name="weightLossPerWeek" id="weightLossPerWeek" value=".5" onchange="drawChart()"/>.5 -->
-                                <div class="checkbox-inline">
+                                <div class="form-check form-check-inline">
                                     <input type="checkbox" name="weightLossPerWeek" id="weightLossPerWeek" value="1"
-                                        onchange="drawChart()" />1
+                                        onchange="drawChart()" /> 1
                                 </div>
-                                <div class="checkbox-inline">
+                                <div class="form-check form-check-inline">
                                     <input type="checkbox" name="weightLossPerWeek" id="weightLossPerWeek" value="2"
-                                        onchange="drawChart()" />2
+                                        onchange="drawChart()" /> 2
                                 </div>
                             </div>
                             <input type="hidden" name="timeUnit" id="timeUnit" value="dt" />
@@ -92,7 +85,7 @@
             </div>
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-title panel-heading">
+                    <div class="panel-heading">
                         <h3>Add Daily Weight Measurement</h3>
                     </div>
                     <div class="panel-body">
@@ -122,7 +115,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-title panel-heading">
+                    <div class="panel-heading">
                         <h3>Chart Controls</h3>
                     </div>
                     <div class="panel-body">
@@ -149,7 +142,7 @@
             </div>
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-title panel-heading">
+                    <div class="panel-heading">
                         <h3>Weight Measurements</h3>
                     </div>
                     <div class="panel-body">
@@ -204,7 +197,7 @@
     <script type="text/javascript" src="js/wms.js"></script>
     <script type="text/javascript" src="js/date.format.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
 </body>
 
