@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - App",
+            "request": "launch",
+            "mainClass": "com.hkstlr.apr2aw2.App",
+            "projectName": "apr2aw2"
+        }
+    ]
+}

@@ -1,5 +1,5 @@
-google.load('visualization', '1', {packages: ['corechart']});
-google.setOnLoadCallback(drawChart);
+google.charts.load('current', {packages: ['corechart', 'line']});
+google.charts.setOnLoadCallback(drawChart);
 
 //const
 var DAY_MILLISECONDS = 86400000;
