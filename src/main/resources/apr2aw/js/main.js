@@ -12,54 +12,51 @@ var isChrome = window.chrome;
 
 function drawChart() {
 
-	//console.log = function() {}
+	var startingWeightElem = document.getElementById("startingWeight");
+	var goalWeightElem = document.getElementById("goalWeight");
+	var startingDateElem = document.getElementById("startingDate");
 
-	//some objs used over
-	var startingWeightObj = document.getElementById("startingWeight");
-	var startingDateObj = document.getElementById("startingDate");
-	var dayRangeStartDateObj = document.getElementById("dayRangeStartDate");
-	var dayRangeEndDateObj = document.getElementById("dayRangeEndDate");
+	var dayRangeStartDateElem = document.getElementById("dayRangeStartDate");
+	var dayRangeEndDateElem = document.getElementById("dayRangeEndDate");
+	
 
-	var startingWeight = parseInt(startingWeightObj.value);
-	var goalWeight = parseInt(document.getElementById("goalWeight").value);
+	var startingWeight = parseInt(startingWeightElem.value);
+	var goalWeight = parseInt(goalWeightElem.value);
 	var weightDiff = startingWeight - goalWeight;
 
 	var weightLossPerWeekAry = getCheckedCheckboxesFor("weightLossPerWeek");
-	//console.log("weightLossPerWeekAry:" + weightLossPerWeekAry);
-	var wlpwObj = document.querySelector('input[name="weightLossPerWeek"]:checked');
-	var parse = null == wlpwObj ? "0" : wlpwObj.value;
+	
+	var weightLossPerWeekElem = document.querySelector('input[name="weightLossPerWeek"]:checked');
+	var parse = null == weightLossPerWeekElem ? "1" : weightLossPerWeekElem.value;
 	var weightLossPerWeek = parseInt(parse);
 
 	var numberOfWeeks = weightDiff / weightLossPerWeek
 	var numberOfDays = numberOfWeeks * 7
 
-	var startingDate = startingDateObj.value;
+	var startingDate = startingDateElem.value;
 	startingDate += " 00:00:00";
 
 	var strtDt = new Date(startingDate);
 	if (strtDt == 'Invalid Date') {
 		strtDt = new Date();
-		startingDateObj.value = formatDate(strtDt, "mm/dd/yyyy");
+		startingDateElem.value = formatDate(strtDt, "mm/dd/yyyy");
 	}
 
 	var dayOfProgram = dateDiffInDays(strtDt, today);
 
-	//console.log("currentDayOfProgram: "+ dayOfProgram);
-
-	if (dayRangeStartDateObj.value == "") {
-		dayRangeStartDateObj.value = startingDateObj.value;
+	if (dayRangeStartDateElem.value == "") {
+		dayRangeStartDateElem.value = startingDateElem.value;
 	}
 
-	var dayRangeStartDateStr = dayRangeStartDateObj.value + " 00:00:00";
-	var rangeStartDate = new Date(dayRangeStartDateStr);
-	//console.log("rangeStartDate:" + rangeStartDate);
+	var dayRangeStartDateStr = dayRangeStartDateElem.value + " 00:00:00";
+	var rangeStartDate = new Date(dayRangeStartDateStr);	
 	var dayRangeStart = dateDiffInDays(rangeStartDate, strtDt);
-	//console.log("dayRangeStart:" + dayRangeStart);
+	
 	if (isNaN(dayRangeStart)) {
 		dayRangeStart = 0;
 	}
 
-	var dayRangeEndDateStr = dayRangeEndDateObj.value + " 00:00:00";
+	var dayRangeEndDateStr = dayRangeEndDateElem.value + " 00:00:00";
 	var rangeEndDate = new Date(dayRangeEndDateStr);
 	var dayRangeEnd = dateDiffInDays(rangeEndDate, strtDt);
 	//console.log("dayRangeEnd: "+ dayRangeEnd);
@@ -213,18 +210,12 @@ function drawChart() {
 
 	var chartDiv = document.getElementById('apr2awChart');
 	var chart = new google.visualization.LineChart(chartDiv);
-
-	//show the chart if there are weeks selected
-	console.log(weightLossPerWeekAry.length);
-	if (weightLossPerWeekAry.length > 0) {
-		chartDiv.classList.remove("hidden");
-		chart.draw(data, options);
-	}
+	chart.draw(data, options);
 		
 	google.visualization.events.addListener(chart, 'select', selectHandler);
 
-	if (dayRangeEndDateObj.value == "") {
-		var startDate = new Date(dayRangeStartDateObj.value);
+	if (dayRangeEndDateElem.value == "") {
+		var startDate = new Date(dayRangeStartDateElem.value);
 		var endTime = startDate.setTime(startDate.getTime() + (DAY_MILLISECONDS * numberOfDays));
 		var endDate = new Date(endTime);
 		setDateFieldValue("dayRangeEndDate", endDate);
@@ -254,7 +245,6 @@ function drawChart() {
 			console.log('The user selected ' + selectedDate.format('isoDate') + ':' + selectedWeight);
 		}
 	}
-
 }
 
 
@@ -334,7 +324,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	//Listen for add clicks
 	document.querySelector("#addWeightMeasurement").addEventListener("click", addWeightMeasurementLS, false);
 	document.getElementById('resetRange').addEventListener('click', resetRange, true);
-	document.getElementById('twoWeekView').addEventListener('click', function () { daySpread(7); }, true);
+	document.getElementById('twoWeekView').addEventListener('click', 
+	function () { daySpread(7); }, true);
 	document.getElementById('clearData').addEventListener('click', clearData, false);
 	document.getElementById('exportData').addEventListener('click', exportData, false);
 
@@ -348,7 +339,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	//default value for weightMeasurement date
 	var today = new Date();
 	setDateFieldValue("weighDate", today);
-
 }, false);//end of DOMContentLoaded
 
 
@@ -391,7 +381,7 @@ function daySpread(numberOfDays) {
 	var startDate = todayS.setTime(today.getTime() - (DAY_MILLISECONDS * numberOfDays));
 	setDateFieldValue("dayRangeStartDate", startDate);
 	var endDate = todayE.setTime(today.getTime() + (DAY_MILLISECONDS * numberOfDays));
-	//console.log("daySpread endDate:" + endDate);
+	
 	setDateFieldValue("dayRangeEndDate", endDate);
 	drawChart();
 }
