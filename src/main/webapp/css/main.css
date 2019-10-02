@@ -27,12 +27,8 @@
 }
 
 .chart {
-  width: 100%;
+  width: auto;
   height: 600px;
-}
-
-.prechart{
-  display: none;
 }
 
 .chartRange{ text-align: left; margin-bottom:var(--pad)}

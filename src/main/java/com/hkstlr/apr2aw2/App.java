@@ -1,7 +1,8 @@
 package com.hkstlr.apr2aw2;
 
-import io.undertow.Handlers;
 import static io.undertow.Handlers.path;
+
+import io.undertow.Handlers;
 import io.undertow.Undertow;
 import io.undertow.server.handlers.resource.ClassPathResourceManager;
 import io.undertow.server.handlers.resource.ResourceHandler;
